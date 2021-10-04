@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>TODO-lista</title>
+    </head>
+    <body>
+        <h1>Kaikki Tehtävät</h1>
+        <ul>
+            {% for tehtava in todo_list %}
+            <li><a href="yksi_listaus/{{tehtava.id}}">{{ tehtava.otsikko }}</a></li><br>
+            <ul>
+                <li>{{ tehtava.muistiinpano }}</li>
+                <li>{{ tehtava.tehty }}</li><br>
+            </ul>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

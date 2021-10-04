@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>TODO-lista</title>
+    </head>
+    <body>
+        <h1>Tehtäväsi</h1>
+        <p>
+        {% for tehtava in todo_list %}
+        {{ tehtava.muistiinpano }}
+        {% endfor %}
+        </p>
+    </body>
+</html>
