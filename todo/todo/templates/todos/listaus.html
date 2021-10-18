@@ -1,16 +1,27 @@
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>TODO-lista</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Importing fonts from Google -->
+        <link href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap" rel="stylesheet">
+        {% load static %}
+
+        <!-- Using stylesheet named, mun_stylet.css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'mun_stylet.css' %}">
     </head>
-    <body>
-        <h1>Kaikki Tehtävät</h1>
+    <body style="background-color: #FEFEFF;">
+        <h1>Your Mission, Should You Choose To Accept It...</h1>
         <ul>
             {% for tehtava in todo_list %}
-            <li><a href="yksi_listaus/{{tehtava.id}}">{{ tehtava.otsikko }}</a></li><br>
-            <ul>
-                <li>{{ tehtava.muistiinpano }}</li>
-                <li>{{ tehtava.tehty }}</li><br>
-            </ul>
+                {% if tehtava.tehty == True %}
+                    <li><s><a class="well-done" href="yksi_listaus/{{tehtava.id}}">{{ tehtava.otsikko }}</a></s> <span style='font-size:20px;'>&#128076;</span></li><br>
+                {% else %}
+                    <li><a class="still-to-do" href="yksi_listaus/{{tehtava.id}}">{{ tehtava.otsikko }}</a></li><br>
+                {% endif %}
             {% endfor %}
         </ul>
     </body>
