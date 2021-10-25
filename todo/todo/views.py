@@ -1,11 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from .models import Tehtava
+from .models import *
+from .forms import *
 
 def todo_listaus(request):
 
+    form = TehtavaLomake()
+
+    if request.method == 'POST':
+        form = TehtavaLomake(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('/')
+
     todo_list = Tehtava.objects.order_by('id')
-    context = {'todo_list' : todo_list}
+    context = {'todo_list' : todo_list, 'form' : form}
 
     return render(request, 'todos/listaus.html', context)
 
