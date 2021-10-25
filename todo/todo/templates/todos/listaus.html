@@ -23,11 +23,19 @@
         <h1>Kaikki Tehtäväsi...</h1>
         <ul>
             {% for tehtava in todo_list %}
+
                 {% if tehtava.tehty == True %}
-                    <li><s><a class="well-done" href="yksi_listaus/{{tehtava.id}}">{{ tehtava.otsikko }}</a></s> <span style='font-size:20px;'>&#128076;</span></li><br>
+
+                    <li><s><a class="well-done" href="yksi_listaus/{{tehtava.id}}">{{ tehtava.otsikko }}</a></s> <span style='font-size:20px;'>&#128076;</span></li>
+                    <a href="{% url 'paivita_tehtava' tehtava.id %}">Päivitä</a><br><br>
+
                 {% else %}
-                    <li><a class="still-to-do" href="yksi_listaus/{{tehtava.id}}">{{ tehtava.otsikko }}</a></li><br>
+
+                    <li><a class="still-to-do" href="yksi_listaus/{{tehtava.id}}">{{ tehtava.otsikko }}</a></li>
+                    <a href="{% url 'paivita_tehtava' tehtava.id %}">Päivitä</a><br><br>
+                    
                 {% endif %}
+
             {% endfor %}
         </ul>
     </body>
