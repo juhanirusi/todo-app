@@ -6,37 +6,42 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Importing fonts from Google -->
+        <!-- Importoidaan Google fontti -->
         <link href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap" rel="stylesheet">
         {% load static %}
 
-        <!-- Using stylesheet named, mun_stylet.css -->
+        <!-- Käytetään CSS tiedostoa, mun_stylet.css -->
         <link rel="stylesheet" type="text/css" href="{% static 'mun_stylet.css' %}">
+
     </head>
-    <body style="background-color: #FEFEFF;">
-        <h1>Lisää Uusi Tehtävä<h1>
+    <body>
+
+        <h1 class="heading-one">Lisää Uusi Tehtävä<h1>
         <form method="POST" action="/">
             {% csrf_token %}
             {{form}}
             <input type="submit" name="Luo Tehtava">
         </form>
-        <h1>Kaikki Tehtäväsi...</h1>
-        <ul>
+
+        <h1 class="heading-one">Kaikki Tehtäväsi...</h1>
             {% for tehtava in todo_list %}
 
                 {% if tehtava.tehty == True %}
 
-                    <li><s><a class="well-done" href="yksi_listaus/{{tehtava.id}}">{{ tehtava.otsikko }}</a></s> <span style='font-size:20px;'>&#128076;</span></li>
-                    <a href="{% url 'paivita_tehtava' tehtava.id %}">Päivitä</a><br><br>
+                    <!-- "If" ehto yliviivaa tehtävän jos se on tehty -->
+                    <s><a class="well-done" href="yksi_listaus/{{tehtava.id}}">{{ tehtava.otsikko }}</a></s> <span style="font-size: 20px">&#128076;</span><br>
+                    <a href="{% url 'paivita_tehtava' tehtava.id %}">Päivitä</a><br>
+                    <a href="{% url 'poista_tehtava' tehtava.id %}">Poista</a><br><br>
 
                 {% else %}
 
-                    <li><a class="still-to-do" href="yksi_listaus/{{tehtava.id}}">{{ tehtava.otsikko }}</a></li>
-                    <a href="{% url 'paivita_tehtava' tehtava.id %}">Päivitä</a><br><br>
+                    <!-- "Else" näyttää tehtävän joka on vielä tekemättä -->
+                    <a class="still-to-do" href="yksi_listaus/{{tehtava.id}}">{{ tehtava.otsikko }}</a> <span style="font-size: 25px">&#128119;</span><br>
+                    <a href="{% url 'paivita_tehtava' tehtava.id %}">Päivitä</a><br>
+                    <a href="{% url 'poista_tehtava' tehtava.id %}">Poista</a><br><br>
                     
                 {% endif %}
 
             {% endfor %}
-        </ul>
     </body>
 </html>

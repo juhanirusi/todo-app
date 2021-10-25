@@ -45,3 +45,18 @@ def paivita_tehtava(request, pk):
     context = {'form' : form}
 
     return render(request, 'todos/paivita_tehtava.html', context)
+
+#-------------------------------------------------------------------------------------
+
+def poista_tehtava(request, pk):
+
+    tehtava = Tehtava.objects.get(id=pk)
+
+    if request.method == 'POST':
+        tehtava.delete()
+        return redirect('/')
+
+    context = {'tehtava' : tehtava}
+    return render(request, 'todos/poista_tehtava.html', context)
+
+#--------------------------------------------------------------------------------------
