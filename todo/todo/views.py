@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 
+#-----------------------------------------------------------------------
+
 def todo_listaus(request):
 
     form = TehtavaLomake()
@@ -18,9 +20,28 @@ def todo_listaus(request):
 
     return render(request, 'todos/listaus.html', context)
 
+#--------------------------------------------------------------------------
+
 def yksi_listaus(request, todo_id):
 
     todo = Tehtava.objects.filter(id=todo_id).get()
     context = {'todo' : todo}
 
     return render(request, 'todos/yksi_listaus.html', context)
+
+#----------------------------------------------------------------------------------
+
+def paivita_tehtava(request, pk):
+    tehtava = Tehtava.objects.get(id=pk)
+
+    form = TehtavaLomake(instance=tehtava)
+
+    if request.method == 'POST':
+        form = TehtavaLomake(request.POST, instance=tehtava)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {'form' : form}
+
+    return render(request, 'todos/paivita_tehtava.html', context)
