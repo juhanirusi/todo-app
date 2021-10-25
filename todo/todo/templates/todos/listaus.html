@@ -14,7 +14,13 @@
         <link rel="stylesheet" type="text/css" href="{% static 'mun_stylet.css' %}">
     </head>
     <body style="background-color: #FEFEFF;">
-        <h1>Your Mission, Should You Choose To Accept It...</h1>
+        <h1>Lisää Uusi Tehtävä<h1>
+        <form method="POST" action="/">
+            {% csrf_token %}
+            {{form}}
+            <input type="submit" name="Luo Tehtava">
+        </form>
+        <h1>Kaikki Tehtäväsi...</h1>
         <ul>
             {% for tehtava in todo_list %}
                 {% if tehtava.tehty == True %}
