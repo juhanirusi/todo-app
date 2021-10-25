@@ -8,4 +8,4 @@ class TehtavaLomake(forms.ModelForm):
 
     class Meta:
         model = Tehtava
-        fields = ('otsikko', 'muistiinpano')
+        fields = ('otsikko', 'muistiinpano', 'tehty')
